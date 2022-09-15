@@ -6,22 +6,22 @@ presubmits:
     - ^master$
     - ^master-
     cluster: build01
-    context: ci/prow/core-valid
+    context: ci/prow/core-valid-changed
     decorate: true
     decoration_config:
       skip_cloning: true
     labels:
       ci.openshift.io/generator: prowgen
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
-    name: pull-ci-smg247-release-master-core-valid
-    rerun_command: /test core-valid
+    name: pull-ci-smg247-release-master-core-valid-changed
+    rerun_command: /test core-valid-changed
     spec:
       containers:
       - args:
         - --gcs-upload-secret=/secrets/gcs/service-account.json
         - --image-import-pull-secret=/etc/pull-secret/.dockerconfigjson
         - --report-credentials-file=/etc/report/credentials
-        - --target=core-valid
+        - --target=core-valid-changed
         command:
         - ci-operator
         image: ci-operator:latest
@@ -48,7 +48,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )core-valid,?($|\s.*)
+    trigger: (?m)^/test( | .* )core-valid-changed,?($|\s.*)
   - agent: kubernetes
     always_run: true
     branches:

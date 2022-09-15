@@ -11,7 +11,7 @@ resources:
       cpu: 100m
       memory: 200Mi
 tests:
-- as: core-valid
+- as: core-valid-changed
   commands: make check-core
   container:
     from: src
