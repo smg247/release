@@ -85,7 +85,7 @@ objects:
       spec:
         serviceAccountName: deck
         containers:
-        - name: deck
+        - name: decks
           image: gcr.io/k8s-prow/deck:v20220914-e7676ddfe7
           args:
           - --config-path=/etc/config/config.yaml
