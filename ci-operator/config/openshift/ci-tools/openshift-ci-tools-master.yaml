@@ -710,7 +710,7 @@ tests:
   commands: make integration
   container:
     from: test-bin
-- as: e2e-changed
+- as: e2e-changed-again
   steps:
     test:
     - as: e2e
