@@ -178,7 +178,8 @@ tests:
   steps:
     cluster_profile: aws-arm64
     dependencies:
-      OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE: release:arm64-latest
+      OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE: release:multi-latest
+      RELEASE_IMAGE_LATEST: release:multi-latest
     env:
       BASE_DOMAIN: arm-ci.devcluster.openshift.com
     workflow: openshift-e2e-aws-sdn
@@ -471,7 +472,7 @@ tests:
   cluster: build01
   cron: 0 2,8,14,20 * * *
   steps:
-    cluster_profile: powervs-2
+    cluster_profile: powervs-1
     dependencies:
       OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE: release:ppc64le-latest
     env:
@@ -483,7 +484,7 @@ tests:
   cluster: build01
   cron: 0 3,9,15,21 * * *
   steps:
-    cluster_profile: powervs-2
+    cluster_profile: powervs-1
     dependencies:
       OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE: release:ppc64le-latest
     env:

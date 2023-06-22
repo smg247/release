@@ -10,6 +10,11 @@ export AWS_SHARED_CREDENTIALS_FILE="${CLUSTER_PROFILE_DIR}/.awscred"
 
 REGION="${LEASED_RESOURCE}"
 
+export HOME="${HOME:-/tmp/home}"
+export XDG_RUNTIME_DIR="${HOME}/run"
+export REGISTRY_AUTH_PREFERENCE=podman # TODO: remove later, used for migrating oc from docker to podman
+mkdir -p "${XDG_RUNTIME_DIR}"
+
 function run_command() {
     local cmd="$1"
     echo "Running Command: ${cmd}"
@@ -94,7 +99,7 @@ function remove_tech_preview_feature_from_manifests()
 }
 
 oc registry login
-prefix="${NAMESPACE}-${JOB_NAME_HASH}-`echo $RANDOM`"
+prefix="${NAMESPACE}-${UNIQUE_HASH}-`echo $RANDOM`"
 cr_yaml_d=`mktemp -d`
 cr_json_d=`mktemp -d`
 resources_d=`mktemp -d`
@@ -107,8 +112,9 @@ oc image info ${RELEASE_IMAGE_LATEST}  || true
 oc image info ${REPO}:latest || true
 run_command "${cmd}" || exit 1
 
-annotation="TechPreviewNoUpgrade"
-remove_tech_preview_feature_from_manifests "${cr_yaml_d}" "${annotation}" || exit 1
+if [[ "${FEATURE_SET}" != "TechPreviewNoUpgrade" ]] &&  [[ ! -f ${SHARED_DIR}/manifest_feature_gate.yaml ]]; then
+  remove_tech_preview_feature_from_manifests "${cr_yaml_d}" "TechPreviewNoUpgrade" || exit 1
+fi
 
 ls "${cr_yaml_d}" > "${credentials_requests_files}"
 
