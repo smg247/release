@@ -669,20 +669,20 @@ presubmits:
     - ^master$
     - ^master-
     cluster: build02
-    context: ci/prow/unit
+    context: ci/prow/unit-new
     decorate: true
     labels:
       ci.openshift.io/generator: prowgen
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
-    name: pull-ci-openshift-ci-tools-master-unit
-    rerun_command: /test unit
+    name: pull-ci-openshift-ci-tools-master-unit-new
+    rerun_command: /test unit-new
     spec:
       containers:
       - args:
         - --gcs-upload-secret=/secrets/gcs/service-account.json
         - --image-import-pull-secret=/etc/pull-secret/.dockerconfigjson
         - --report-credentials-file=/etc/report/credentials
-        - --target=unit
+        - --target=unit-new
         command:
         - ci-operator
         image: ci-operator:latest
@@ -715,7 +715,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )unit,?($|\s.*)
+    trigger: (?m)^/test( | .* )unit-new,?($|\s.*)
   - agent: kubernetes
     always_run: true
     branches:
