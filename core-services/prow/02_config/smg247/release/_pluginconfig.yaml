@@ -75,3 +75,4 @@ plugins:
     - wip
     - yuks
     - approve
+    - mongoose # wouldn't that be fun???
