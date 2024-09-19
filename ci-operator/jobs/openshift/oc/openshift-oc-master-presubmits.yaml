@@ -920,20 +920,20 @@ presubmits:
     - ^master$
     - ^master-
     cluster: build01
-    context: ci/prow/unit
+    context: ci/prow/unit-changed-name
     decorate: true
     labels:
       ci.openshift.io/generator: prowgen
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
-    name: pull-ci-openshift-oc-master-unit
-    rerun_command: /test unit
+    name: pull-ci-openshift-oc-master-unit-changed-name
+    rerun_command: /test unit-changed-name
     spec:
       containers:
       - args:
         - --gcs-upload-secret=/secrets/gcs/service-account.json
         - --image-import-pull-secret=/etc/pull-secret/.dockerconfigjson
         - --report-credentials-file=/etc/report/credentials
-        - --target=unit
+        - --target=unit-changed-name
         command:
         - ci-operator
         image: ci-operator:latest
@@ -966,7 +966,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )unit,?($|\s.*)
+    trigger: (?m)^/test( | .* )unit-changed-name,?($|\s.*)
   - agent: kubernetes
     always_run: true
     branches:
