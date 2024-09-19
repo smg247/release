@@ -919,10 +919,11 @@ presubmits:
     branches:
     - ^master$
     - ^master-
-    cluster: build01
+    cluster: app.ci
     context: ci/prow/unit-changed-name
     decorate: true
     labels:
+      ci-operator.openshift.io/cluster: app.ci
       ci.openshift.io/generator: prowgen
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
     name: pull-ci-openshift-oc-master-unit-changed-name

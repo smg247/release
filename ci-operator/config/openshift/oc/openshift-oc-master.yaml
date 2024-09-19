@@ -145,6 +145,7 @@ tests:
   container:
     from: src
 - as: unit-changed-name
+  cluster: app.ci
   commands: |
     make test-unit JUNITFILE=${ARTIFACT_DIR}/junit_report.xml --warn-undefined-variables
   container:
