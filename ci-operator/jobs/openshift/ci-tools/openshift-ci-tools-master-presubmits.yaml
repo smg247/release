@@ -664,21 +664,21 @@ presubmits:
     - ^master$
     - ^master-
     cluster: build10
-    context: ci/prow/unit
+    context: ci/prow/unit-changed
     decorate: true
     labels:
       ci-operator.openshift.io/cluster: build10
       ci.openshift.io/generator: prowgen
       pj-rehearse.openshift.io/can-be-rehearsed: "true"
-    name: pull-ci-openshift-ci-tools-master-unit
-    rerun_command: /test unit
+    name: pull-ci-openshift-ci-tools-master-unit-changed
+    rerun_command: /test unit-changed
     spec:
       containers:
       - args:
         - --gcs-upload-secret=/secrets/gcs/service-account.json
         - --image-import-pull-secret=/etc/pull-secret/.dockerconfigjson
         - --report-credentials-file=/etc/report/credentials
-        - --target=unit
+        - --target=unit-changed
         command:
         - ci-operator
         image: ci-operator:latest
@@ -711,7 +711,7 @@ presubmits:
       - name: result-aggregator
         secret:
           secretName: result-aggregator
-    trigger: (?m)^/test( | .* )unit,?($|\s.*)
+    trigger: (?m)^/test( | .* )unit-changed,?($|\s.*)
   - agent: kubernetes
     always_run: true
     branches:
