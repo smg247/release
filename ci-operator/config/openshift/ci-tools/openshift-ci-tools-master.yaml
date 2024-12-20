@@ -789,7 +789,7 @@ resources:
       memory: 1Gi
 test_binary_build_commands: make race-install
 tests:
-- as: unit
+- as: unit-changed
   cluster: build10
   commands: make test TESTFLAGS='-count=25 -coverprofile=cover.out'
   container:
