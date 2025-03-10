@@ -797,12 +797,12 @@ resources:
       memory: 1Gi
 test_binary_build_commands: make race-install
 tests:
-- as: unit
+- as: unit-changed
   commands: make test TESTFLAGS='-count=25 -coverprofile=cover.out'
   container:
     from: src
   node_architecture: arm64
-- as: codegen
+- as: codegen-new-name
   commands: make verify-gen
   container:
     from: src
@@ -816,7 +816,6 @@ tests:
   commands: make integration
   container:
     from: test-bin
-  node_architecture: arm64
 - always_run: false
   as: e2e
   cluster: build11
